@@ -790,6 +790,32 @@ button { font-family: inherit; }
     margin-top: 4px;
 }
 
+.search-bar-container {
+    margin-bottom: 16px;
+}
+
+.search-bar {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    font-family: inherit;
+    font-size: 13px;
+    color: var(--text);
+    background: white;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.search-bar::placeholder {
+    color: var(--text-faint);
+}
+
+.search-bar:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px var(--primary-softer);
+}
+
 .discussion-tabs {
     display: flex;
     gap: 8px;
@@ -908,6 +934,192 @@ button { font-family: inherit; }
 }
 
 .post-footer svg { width: 12px; height: 12px; }
+
+.like-btn-small {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--text-muted);
+    font-size: 11px;
+    font-weight: 600;
+    padding: 0;
+    transition: all 0.2s;
+    font-family: inherit;
+}
+
+.like-btn-small:hover {
+    color: var(--primary);
+}
+
+.like-btn-small.liked {
+    color: var(--primary);
+}
+
+.like-btn-small svg {
+    width: 12px;
+    height: 12px;
+}
+
+/* POST DETAIL SCREEN */
+.post-detail-header {
+    margin-bottom: 24px;
+}
+
+.post-detail-title {
+    font-family: var(--serif);
+    font-size: 22px;
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+    margin-bottom: 12px;
+    color: var(--text);
+}
+
+.post-detail-snippet {
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.5;
+}
+
+.post-detail-actions {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 14px 0;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 24px;
+}
+
+.like-btn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 8px 12px;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-muted);
+    transition: all 0.2s;
+    font-family: inherit;
+}
+
+.like-btn:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+}
+
+.like-btn.liked {
+    background: var(--primary-soft);
+    border-color: var(--primary);
+    color: var(--primary-deep);
+}
+
+.like-btn svg {
+    width: 14px;
+    height: 14px;
+}
+
+.comment-count {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 12px;
+    color: var(--text-muted);
+    font-weight: 600;
+}
+
+.comment-count svg {
+    width: 14px;
+    height: 14px;
+}
+
+.comments-section {
+    margin-top: 24px;
+}
+
+.comments-section h3 {
+    font-family: var(--serif);
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 14px;
+    color: var(--text);
+}
+
+.comment-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 12px;
+    margin-bottom: 10px;
+}
+
+.comment-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+}
+
+.comment-avatar {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 700;
+    color: white;
+    flex-shrink: 0;
+}
+
+.comment-meta {
+    flex: 1;
+    min-width: 0;
+}
+
+.comment-author {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--text);
+}
+
+.comment-time {
+    font-size: 10px;
+    color: var(--text-faint);
+}
+
+.comment-text {
+    font-size: 12px;
+    color: var(--text);
+    line-height: 1.45;
+    margin-bottom: 8px;
+}
+
+.comment-footer {
+    display: flex;
+    gap: 10px;
+    font-size: 11px;
+    color: var(--text-muted);
+}
+
+.comment-footer span {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.comment-footer svg {
+    width: 12px;
+    height: 12px;
+}
 
 .post-footer .badge {
     margin-left: auto;

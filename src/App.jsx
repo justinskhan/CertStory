@@ -9,6 +9,7 @@ import ProfileScreen from './screens/ProfileScreen.jsx'
 import FieldDetailScreen from './screens/FieldDetailScreen.jsx'
 import CertDetailScreen from './screens/CertDetailScreen.jsx'
 import QuizScreen from './screens/QuizScreen.jsx'
+import PostDetailScreen from './screens/PostDetailScreen.jsx'
 
 const TAB_LABELS = {
   home: 'Home',
@@ -63,6 +64,8 @@ export default function App() {
           return <FieldDetailScreen nav={nav} fieldId={subScreen.params.fieldId} />
         case 'certDetail':
           return <CertDetailScreen nav={nav} certId={subScreen.params.certId} />
+        case 'postDetail':
+          return <PostDetailScreen nav={nav} postId={subScreen.params.postId} />
         default:
           return null
       }
@@ -82,7 +85,6 @@ export default function App() {
       <div className="page-header">
         <span className="eyebrow">Interactive Prototype</span>
         <h1><em>CertStory</em> — your personal certification roadmap</h1>
-        <p>Tap any icon to navigate. Click skill cards, cert nodes, or the quiz CTA to drill in.</p>
       </div>
 
       <PhoneFrame
@@ -90,8 +92,6 @@ export default function App() {
         screen={renderActiveScreen()}
         nav={<BottomNav activeTab={tab} onTabChange={goToTab} hasSubScreen={!!subScreen} />}
       />
-
-      <p className="demo-hint">Try the quiz from Home, then explore the Roadmap and Charts</p>
     </div>
   )
 }

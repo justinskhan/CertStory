@@ -5,6 +5,36 @@ import { ThumbsUpIcon, CommentIcon } from '../icons/Icons.jsx'
 
 export default function DiscussionScreen({ nav }) {
   const [activeCategory, setActiveCategory] = useState('For you')
+  const [searchQuery, setSearchQuery] = useState('')
+  const [likedPosts, setLikedPosts] = useState(new Set())
+
+  const filteredPosts = DISCUSSION_POSTS.filter(post => {
+    // Filter by category
+    const categoryMatch = activeCategory === 'For you' || post.tag === activeCategory
+    // Filter by search query
+    const searchMatch = searchQuery === '' ||
+      post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      post.author.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      post.snippet.toLowerCase().includes(searchQuery.toLowerCase())
+    return categoryMatch && searchMatch
+  })
+
+  function handleLikeClick(e, postId) {
+    e.stopPropagation()
+    setLikedPosts(prev => {
+      const newSet = new Set(prev)
+      if (newSet.has(postId)) {
+        newSet.delete(postId)
+      } else {
+        newSet.add(postId)
+      }
+      return newSet
+    })
+  }
+
+  function handlePostClick(postId) {
+    nav.pushScreen('postDetail', { postId })
+  }
 
   return (
     <div className="screen">
@@ -13,6 +43,16 @@ export default function DiscussionScreen({ nav }) {
       <div className="discussion-header">
         <h2>Discussion Board</h2>
         <p>Share study tips, ask questions, swap stories</p>
+      </div>
+
+      <div className="search-bar-container">
+        <input
+          type="text"
+          className="search-bar"
+          placeholder="Search conversations..."
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+        />
       </div>
 
       <div className="discussion-tabs">
@@ -27,8 +67,8 @@ export default function DiscussionScreen({ nav }) {
         ))}
       </div>
 
-      {DISCUSSION_POSTS.map(post => (
-        <button key={post.id} className="post-card" onClick={() => alert(`TODO: open detail for "${post.title}"`)}>
+      {filteredPosts.map(post => (
+        <button key={post.id} className="post-card" onClick={() => handlePostClick(post.id)}>
           <div className="post-header">
             <div className="post-avatar" style={{ background: post.avatarColor }}>{post.initials}</div>
             <div className="post-meta">
@@ -43,7 +83,12 @@ export default function DiscussionScreen({ nav }) {
           <div className="post-title">{post.title}</div>
           <div className="post-snippet">{post.snippet}</div>
           <div className="post-footer">
-            <span><ThumbsUpIcon />{post.upvotes}</span>
+            <button
+              className={`like-btn-small ${likedPosts.has(post.id) ? 'liked' : ''}`}
+              onClick={(e) => handleLikeClick(e, post.id)}
+            >
+              <ThumbsUpIcon />{likedPosts.has(post.id) ? post.upvotes + 1 : post.upvotes}
+            </button>
             <span><CommentIcon />{post.comments}</span>
             {post.badge && <span className="badge">{post.badge}</span>}
           </div>
