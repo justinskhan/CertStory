@@ -87,21 +87,6 @@ Example: making a discussion post open a detail screen.
 
 The included `render.yaml` also enables **pull-request previews**, so every PR gets its own preview URL.
 
-## Working with Claude Code
-
-This project is set up to work great with [Claude Code](https://docs.claude.com/claude-code):
-
-```bash
-npm install -g @anthropic-ai/claude-code
-cd certstory
-claude
-```
-
-Then ask things like:
-- "Add a 'My Notes' section to the cert detail screen"
-- "Make the quiz save the user's answers to localStorage"
-- "Build a sign-in page styled like the rest of the app"
-
 ## License
 
 For demo use

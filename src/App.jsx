@@ -27,11 +27,18 @@ export default function App() {
   const [subScreen, setSubScreen] = useState(null)
   // Brief label flash when changing tabs
   const [labelFlash, setLabelFlash] = useState({ text: '', show: false })
+  // Track if user has completed the quiz in this session
+  const [quizCompleted, setQuizCompleted] = useState(false)
 
   function goToTab(name) {
     setSubScreen(null)
     setTab(name)
     flashLabel(TAB_LABELS[name])
+
+    // If clicking roadmap and quiz not yet completed, show quiz instead
+    if (name === 'roadmap' && !quizCompleted) {
+      setSubScreen({ name: 'quiz', params: {} })
+    }
   }
 
   function pushScreen(name, params = {}) {
@@ -52,7 +59,7 @@ export default function App() {
     return () => clearTimeout(t)
   }, [labelFlash.show, labelFlash.text])
 
-  const nav = { goToTab, pushScreen, popScreen, tab }
+  const nav = { goToTab, pushScreen, popScreen, tab, setQuizCompleted }
 
   // Render the active screen (sub-screen takes priority over tab)
   function renderActiveScreen() {
