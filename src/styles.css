@@ -515,6 +515,7 @@ button { font-family: inherit; }
 
 .cert-bubble .cert-meta { font-size: 10px; color: var(--text-muted); }
 .cert-bubble.done { border-color: var(--success-soft); background: linear-gradient(135deg, white, #f6fcf8); }
+.cert-bubble.quiz-done { border-color: var(--primary-soft); background: linear-gradient(135deg, white, #e8f2ff); }
 .cert-bubble.active { border-color: var(--accent-gold); box-shadow: 0 8px 24px rgba(212, 162, 58, 0.18); }
 .cert-bubble.locked { opacity: 0.6; }
 
@@ -537,6 +538,8 @@ button { font-family: inherit; }
 .cert-marker svg { width: 12px; height: 12px; }
 .cert-marker.done { background: var(--success); border-color: var(--success); }
 .cert-marker.done svg { color: white; }
+.cert-marker.quiz-done { background: var(--primary); border-color: var(--primary); }
+.cert-marker.quiz-done svg { color: white; }
 .cert-marker.active { background: var(--accent-gold); border-color: var(--accent-gold); }
 .cert-marker.active svg { color: white; }
 .cert-marker.locked svg { color: var(--text-faint); }

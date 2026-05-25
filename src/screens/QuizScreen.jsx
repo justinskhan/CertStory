@@ -84,7 +84,12 @@ function ResultsPage({ answers, nav }) {
 
       <div className="quiz-actions">
         <button className="btn-secondary" onClick={nav.popScreen}>Close</button>
-        <button className="btn-primary" onClick={() => { nav.setQuizCompleted(true); nav.popScreen(); nav.goToTab('roadmap'); }}>
+        <button className="btn-primary" onClick={() => {
+          nav.setQuizResults({ answers, recommendations })
+          nav.setQuizCompleted(true)
+          nav.popScreen()
+          nav.goToTab('roadmap')
+        }}>
           View my Roadmap
         </button>
       </div>

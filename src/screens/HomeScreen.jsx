@@ -10,8 +10,25 @@ const fieldIcons = {
   cloud: CloudIcon
 }
 
-export default function HomeScreen({ nav }) {
+export default function HomeScreen({ nav, quizCompleted, completedCerts, quizResults }) {
   const stats = getRoadmapStats()
+
+  // Calculate stats for quiz-generated roadmap
+  const getQuizStats = () => {
+    if (!quizResults?.recommendations?.primary) return null
+    const total = quizResults.recommendations.primary.recommendedPath?.length || 0
+    const done = completedCerts.length
+    return {
+      total,
+      done,
+      percent: total > 0 ? Math.round((done / total) * 100) : 0,
+      name: `${quizResults.answers?.niche?.[0] || quizResults.answers?.certField} Certification Path`
+    }
+  }
+
+  const quizStats = quizCompleted ? getQuizStats() : null
+  const displayStats = quizStats || stats
+  const roadmapName = quizStats?.name || CURRENT_ROADMAP.name
 
   return (
     <div className="screen">
@@ -29,14 +46,20 @@ export default function HomeScreen({ nav }) {
         style={{ border: 'none', width: '100%', textAlign: 'left', cursor: 'pointer' }}
       >
         <div className="label">Current Roadmap</div>
-        <div className="roadmap-name">{CURRENT_ROADMAP.name}</div>
-        <div className="progress-bar">
-          <div className="progress-fill" style={{ width: `${stats.percent}%` }} />
+        <div className="roadmap-name">
+          {quizCompleted ? roadmapName : 'Complete the quiz to unlock your roadmap!'}
         </div>
-        <div className="progress-stats">
-          <span><strong>{stats.done} of {stats.total}</strong> certifications complete</span>
-          <span>{stats.percent}%</span>
-        </div>
+        {quizCompleted && (
+          <>
+            <div className="progress-bar">
+              <div className="progress-fill" style={{ width: `${displayStats.percent}%` }} />
+            </div>
+            <div className="progress-stats">
+              <span><strong>{displayStats.done} of {displayStats.total}</strong> certifications complete</span>
+              <span>{displayStats.percent}%</span>
+            </div>
+          </>
+        )}
       </button>
 
       <div className="section-title">

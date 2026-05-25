@@ -29,6 +29,10 @@ export default function App() {
   const [labelFlash, setLabelFlash] = useState({ text: '', show: false })
   // Track if user has completed the quiz in this session
   const [quizCompleted, setQuizCompleted] = useState(false)
+  // Store quiz results to populate roadmap
+  const [quizResults, setQuizResults] = useState(null)
+  // Track completed certifications in the roadmap
+  const [completedCerts, setCompletedCerts] = useState([])
 
   function goToTab(name) {
     setSubScreen(null)
@@ -59,7 +63,7 @@ export default function App() {
     return () => clearTimeout(t)
   }, [labelFlash.show, labelFlash.text])
 
-  const nav = { goToTab, pushScreen, popScreen, tab, setQuizCompleted }
+  const nav = { goToTab, pushScreen, popScreen, tab, setQuizCompleted, setQuizResults, setCompletedCerts }
 
   // Render the active screen (sub-screen takes priority over tab)
   function renderActiveScreen() {
@@ -78,12 +82,12 @@ export default function App() {
       }
     }
     switch (tab) {
-      case 'home':       return <HomeScreen nav={nav} />
+      case 'home':       return <HomeScreen nav={nav} quizCompleted={quizCompleted} completedCerts={completedCerts} quizResults={quizResults} />
       case 'charts':     return <ChartsScreen nav={nav} />
       case 'discussion': return <DiscussionScreen nav={nav} />
-      case 'roadmap':    return <RoadmapScreen nav={nav} />
+      case 'roadmap':    return <RoadmapScreen nav={nav} quizResults={quizResults} completedCerts={completedCerts} />
       case 'profile':    return <ProfileScreen nav={nav} />
-      default:           return <HomeScreen nav={nav} />
+      default:           return <HomeScreen nav={nav} quizCompleted={quizCompleted} completedCerts={completedCerts} quizResults={quizResults} />
     }
   }
 

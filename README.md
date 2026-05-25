@@ -2,11 +2,19 @@
 
 An intelligent roadmap and recommendation tool that helps aspiring tech professionals choose the right certifications based on real-time job market data.
 
-## Tech Stack
+## Home Page 
+The purpose of the home page is to introduce the user to all the certifications that are available in the tech sector they are looking at. The demo includes Information Technology, Software Engineering, Cybersecurity, and Cloud Computing. 
 
-- **React 18** + **Vite** (fast dev server, optimized production build)
-- **Vanilla CSS** with CSS variables (no Tailwind, no UI library — easy to customize)
-- **Static deployment** ready for Render.com
+Users can also see the current roadmap they are pursuing as well as the navigation towards the quiz. 
+
+## Charts
+The charts page is useful for users to determine which of the certifications are best for them as it will include data from LinkedIn and Greenhouse to determine which certification is best for obtaining a job. In addition to this there is companies that the user can see who requested certain certifications 
+
+## Discussion Board 
+A big part of CertStory was to have a unified discussion board for certification applicants to have to share resources, communicate, as well as find information about a certification 
+
+## Roadmap 
+The roadmap page will show a quiz at first which the user can fill out in order to find which certifications are best for them. From there, the user will be able to see 5 certifications in a path that they should be working towards.
 
 ## Quick Start
 
@@ -24,66 +32,9 @@ npm run build
 npm run preview
 ```
 
-## Project Structure
+## Deployed to Render.com
 
-```
-certstory/
-├── index.html              ← entry HTML (loads Google Fonts)
-├── package.json
-├── vite.config.js
-├── render.yaml             ← Render.com deployment config
-└── src/
-    ├── main.jsx            ← React entry point
-    ├── App.jsx             ← App shell + navigation state
-    ├── styles.css          ← All styles (CSS variables at top)
-    ├── components/
-    │   ├── PhoneFrame.jsx  ← The mobile phone outer frame
-    │   ├── BottomNav.jsx   ← 5-icon bottom navigation
-    │   ├── StatusBar.jsx   ← iOS-style status bar
-    │   └── TopBar.jsx      ← Menu button + avatar
-    ├── screens/
-    │   ├── HomeScreen.jsx        ← Welcome + skill categories
-    │   ├── ChartsScreen.jsx      ← Market insights, employer data
-    │   ├── DiscussionScreen.jsx  ← Community posts
-    │   ├── RoadmapScreen.jsx     ← Vertical cert path
-    │   ├── ProfileScreen.jsx     ← User stats + menu
-    │   ├── FieldDetailScreen.jsx ← Drilldown: certs in a field
-    │   ├── CertDetailScreen.jsx  ← Single cert details
-    │   └── QuizScreen.jsx        ← 4-step onboarding quiz
-    ├── data/
-    │   ├── certifications.js  ← Cert database
-    │   ├── fields.js          ← 4 main fields + their certs
-    │   ├── roadmap.js         ← Current user's roadmap
-    │   ├── posts.js           ← Discussion posts
-    │   └── chartsData.js      ← Market data for charts
-    └── icons/
-        └── Icons.jsx          ← Reusable SVG icons
-```
-
-## How Navigation Works
-
-The app has two layers of navigation:
-
-1. **Bottom tabs** (`tab` state in `App.jsx`): home / charts / discussion / roadmap / profile
-2. **Sub-screens** (`subScreen` state in `App.jsx`): quiz, field detail, cert detail — pushed on top of a tab, with a back button to pop
-
-Both `goToTab(name)` and `pushScreen(name, params)` / `popScreen()` are passed down through props.
-
-## Adding a New Clickable Feature
-
-Example: making a discussion post open a detail screen.
-
-1. Add a screen component in `src/screens/PostDetailScreen.jsx`
-2. In `App.jsx`, add a case for `'postDetail'` in the sub-screen renderer
-3. In `DiscussionScreen.jsx`, call `pushScreen('postDetail', { postId: 123 })` on click
-
-## Deploying to Render.com
-
-1. Push this repo to GitHub
-2. Go to [render.com](https://render.com) → **New** → **Static Site**
-3. Connect your GitHub repo
-4. Render will auto-detect `render.yaml`. Click **Create Static Site**.
-5. Done. Render runs `npm install && npm run build` and serves `./dist`.
+Deployed as a static site for demo purposes.
 
 The included `render.yaml` also enables **pull-request previews**, so every PR gets its own preview URL.
 
